@@ -1,0 +1,123 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+		<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.5.8/js/jsplumb.min.js"></script>
+		<script src="events.js"></script>
+		<script>
+			function ready(){
+				// createSVGblock();
+				var addButton = document.getElementById("addButton");
+				var deleteButton = document.getElementById("deleteButton");
+				addButton.addEventListener("click",addNode);
+				addButton.addEventListener("click",updateNodeList);
+				
+				addButton.addEventListener("click", function(){
+					addFunction(document.getElementById(document.getElementById("nodeName").value));
+				})
+				
+				var relateButton = document.getElementById("relateButton");
+				
+				relateButton.addEventListener("click",relateNode);
+
+				deleteButton.addEventListener("click",deleteNode);
+
+			}
+		</script>
+		<style>
+			.node{
+				position: absolute;
+				padding-top: 25px;
+				cursor: move;
+				width:100px;
+				height:50px;
+				border: 2px solid white;
+    			border-radius: 8px;
+				background-color: #2196F3;
+				color: white;
+				vertical-align: middle;
+				text-align: center;
+				margin-bottom: 15px;
+				margin-top: 15px;
+				margin-right: 15px;
+				margin-left: 15px;
+			}
+			.container{
+				width:100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+	<body onload="ready()">
+		<div id="mdl-layout">
+			<header class = "mdl-layout__header">
+            <div class = "mdl-layout__header-row">      
+               <span class = "mdl-layout-title">Graph Theory Canvas</span>          
+            </div>       
+         	</header>
+
+         	<div class = "mdl-grid">
+         		<div class = "mdl-cell mdl-cell--6-col">
+         			<div class = "mdl-grid">
+         				<div class = "mdl-cell mdl-cell--4-col">
+         					<div class="mdl-textfield mdl-js-textfield">
+    							<input class="mdl-textfield__input mdl-textfield--floating-label" type="text" id="nodeName">
+    							<label class="mdl-textfield__label" for="nodeName">Node Name</label>
+  							</div>
+  						</div>
+  						<div class = "mdl-cell mdl-cell--2-col">	
+     						<button id="addButton" class= "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+     							ADD
+     						</button>
+         				</div>
+         				<div class = "mdl-cell mdl-cell--4-col">
+         					<div class="mdl-textfield mdl-js-textfield">
+    							<input class="mdl-textfield__input mdl-textfield--floating-label" type="text" id="deleteNodeName">
+    							<label class="mdl-textfield__label" for="deleteNodeName">Node Name</label>
+  							</div>
+  						</div>
+  						<div class = "mdl-cell mdl-cell--2-col">	
+     						<button id="deleteButton" class= "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+     							DELETE
+     						</button>
+         				</div>
+         			</div>
+         		</div>
+
+         		<div class = "mdl-cell mdl-cell--6-col">
+         			<div class = "mdl-grid">
+         				<div class = "mdl-cell mdl-cell--4-col">
+         					<div class="mdl-textfield mdl-js-textfield">
+    							<input class="mdl-textfield__input mdl-textfield--floating-label" type="text" id="node1">
+    							<label class="mdl-textfield__label" for="node1" id="nodeLabel1"></label>
+  							</div>
+  						</div>
+  						<div class ="mdl-cell mdl-cell--4-col" style="text-align: right">
+						    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							    <select class="mdl-textfield__input" id="nodeList" name="nodeList">
+							    </select>
+							  </div>
+         				</div>
+         				<div class="mdl-cell--4-col mdl-cell">
+         					<button id="relateButton" class= "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+     							Add Relation
+     						</button>
+         				</div>
+         			</div>
+         		</div>         		
+         	</div>
+
+         	<!--Canvas starts here -->
+         	<div class="mdl-grid" style="width:100%;
+				height: 100%;">
+         		<div class = "mdl-cell mdl-cell--12-col" id="container">
+         			<ul style="list-style-type:none" id="nodeCollection">
+         			</ul>
+
+         		</div>         		
+         	</div>
+		</div>
+	</body>
+</html>
